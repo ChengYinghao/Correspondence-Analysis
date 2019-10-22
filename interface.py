@@ -1,3 +1,6 @@
+import numpy as np
+
+
 def standardization(matrix):
     """
     步骤一 \n
@@ -8,6 +11,9 @@ def standardization(matrix):
     :param matrix: 原始数据矩阵，其 shape 为 (条目数, 特征数)
     :return: 标准化后的矩阵
     """
+    matrix = matrix - np.mean(matrix, 0)
+    matrix /= np.sqrt(np.mean(np.square(matrix), 0))
+    return matrix
 
 
 def initial_factor_load_matrix(matrix):
