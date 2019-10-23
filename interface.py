@@ -27,6 +27,16 @@ def initial_factor_load_matrix(matrix):
     :param matrix: 标准化后的矩阵，其 shape 为 (条目数, 特征数)
     :return: 对应的初始因子载荷阵
     """
+    # 求协方差矩阵
+    covar = np.mean(np.expand_dims(matrix, 1) * np.expand_dims(matrix, 2), 0)
+    # 求特征值和特征向量
+    values, vectors = np.linalg.eig(covar)
+    # 将特征向量根据特征值大小排序
+    vectors = vectors[np.argsort(values), :]
+    # 用特征向量求主成分
+    factor_matrix = np.sum(np.expand_dims(vectors, 0) * np.expand_dims(matrix, 1), -1)
+
+    return factor_matrix
 
 
 def varMaxOrthogonalRotation(matrix):
