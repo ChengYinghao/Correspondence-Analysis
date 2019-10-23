@@ -5,14 +5,17 @@ def standardization(matrix):
     """
     步骤一 \n
     原始数据的标准化，
-    即分别对每一个特征的值进行缩放，
+    即分别对每一个特征的值进行平移和缩放，
     使他们的均值为 0，方差为 1
 
     :param matrix: 原始数据矩阵，其 shape 为 (条目数, 特征数)
     :return: 标准化后的矩阵
     """
+    # 平移使均值为 0
     matrix = matrix - np.mean(matrix, 0)
+    # 缩放使方差为 1
     matrix /= np.sqrt(np.mean(np.square(matrix), 0))
+
     return matrix
 
 
